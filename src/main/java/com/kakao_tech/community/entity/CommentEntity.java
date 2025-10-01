@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "comments")
-public class Comment {
+public class CommentEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
     private Long id;
 
-    @Column(unique = false, nullable = false, length = 255, columnDefinition = "VARCHAR")
+    @Column(unique = false, nullable = false, length = 255)
     private String body;
 
     @Column(unique = false, nullable = false, columnDefinition = "DATETIME")
@@ -25,17 +25,17 @@ public class Comment {
     @Column(unique = false, nullable = true, columnDefinition = "DATETIME")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", columnDefinition = "INT")
-    private User user;
+    private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", columnDefinition = "BIGINT")
-    private Post post;
+    private PostEntity post;
 
-    protected Comment() {}
+    protected CommentEntity() {}
 
-    public Comment(String body, User user, Post post) {
+    public CommentEntity(String body, UserEntity user, PostEntity post) {
         this.body = body;
         this.createdAt = LocalDateTime.now();
 

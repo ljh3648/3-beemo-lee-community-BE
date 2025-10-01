@@ -10,18 +10,18 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "posts")
-public class Post {
+public class PostEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
     private Long id;
 
-    @Column(unique = false, nullable = false, length = 12, columnDefinition = "VARCHAR")
+    @Column(unique = false, nullable = false, length = 12)
     private String title;
 
     @Column(unique = false, nullable = false, columnDefinition = "LONGTEXT")
     private String body;
 
-    @Column(unique = false, nullable = false, length = 255, columnDefinition = "VARCHAR")
+    @Column(unique = false, nullable = false, length = 255)
     private String imageUrl;
 
     @Column(unique = false, nullable = false, columnDefinition = "DATETIME")
@@ -37,13 +37,13 @@ public class Post {
     @Column(unique = false, nullable = false, columnDefinition = "INT")
     private Integer commentCnt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", columnDefinition = "INT")
-    private User user;
+    private UserEntity user;
 
-    protected Post() {}
+    protected PostEntity() {}
 
-    public Post(String title, String body, User user) {
+    public PostEntity(String title, String body, UserEntity user) {
         this.title = title;
         this.body = body;
         this.createdAt = LocalDateTime.now();
@@ -51,7 +51,7 @@ public class Post {
         this.user = user;
     }
 
-    public Post(String title, String body, String imageUrl, User user) {
+    public PostEntity(String title, String body, String imageUrl, UserEntity user) {
         this(title, body, user);
         this.imageUrl = imageUrl;
     }
