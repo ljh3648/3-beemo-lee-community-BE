@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC&useSSL=false
     username: root
-    password: 1234
+    password: Lee4056!6685
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
