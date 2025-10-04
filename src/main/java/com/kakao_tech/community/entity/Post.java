@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "posts")
-public class PostEntity {
+public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
     private Long id;
@@ -39,11 +39,11 @@ public class PostEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", columnDefinition = "INT")
-    private UserEntity user;
+    private User user;
 
-    protected PostEntity() {}
+    protected Post() {}
 
-    public PostEntity(String title, String body, UserEntity user) {
+    public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;
         this.createdAt = LocalDateTime.now();
@@ -51,7 +51,7 @@ public class PostEntity {
         this.user = user;
     }
 
-    public PostEntity(String title, String body, String imageUrl, UserEntity user) {
+    public Post(String title, String body, String imageUrl, User user) {
         this(title, body, user);
         this.imageUrl = imageUrl;
     }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "comments")
-public class CommentEntity {
+public class Comment {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
@@ -27,15 +27,15 @@ public class CommentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", columnDefinition = "INT")
-    private UserEntity user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", columnDefinition = "BIGINT")
-    private PostEntity post;
+    private Post post;
 
-    protected CommentEntity() {}
+    protected Comment() {}
 
-    public CommentEntity(String body, UserEntity user, PostEntity post) {
+    public Comment(String body, User user, Post post) {
         this.body = body;
         this.createdAt = LocalDateTime.now();
 

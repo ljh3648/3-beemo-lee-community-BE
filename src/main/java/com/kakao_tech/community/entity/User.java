@@ -1,5 +1,6 @@
 package com.kakao_tech.community.entity;
 
+import com.kakao_tech.community.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "users")
-public class UserEntity {
+public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT")
     private Integer id;
@@ -25,15 +26,21 @@ public class UserEntity {
     @Column(unique = false, nullable = true, length = 255)
     private String profileUrl;
 
-    protected UserEntity() {}
+    protected User() {}
 
-    public UserEntity(String nickname, String email, String password) {
+    public User(UserDTO.SignUpRequset signUpRequset) {
+        this.nickname = signUpRequset.getNickname();
+        this.email = signUpRequset.getEmail();
+        this.password = signUpRequset.getPassword();
+    }
+
+    public User(String nickname, String email, String password) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
     }
 
-    public UserEntity(String nickname, String email, String password, String profileUrl) {
+    public User(String nickname, String email, String password, String profileUrl) {
         this(nickname, email, password);
         this.profileUrl = profileUrl;
     }

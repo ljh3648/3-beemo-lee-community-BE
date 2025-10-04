@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @Table(name = "likes")
-public class LikeEntity {
+public class Like {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
     private Long id;
@@ -19,15 +19,15 @@ public class LikeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", columnDefinition = "INT")
-    private UserEntity user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", columnDefinition = "BIGINT")
-    private PostEntity post;
+    private Post post;
 
-    protected LikeEntity() {}
+    protected Like() {}
 
-    public LikeEntity(UserEntity user, PostEntity post) {
+    public Like(User user, Post post) {
         this.user = user;
         this.post = post;
     }
