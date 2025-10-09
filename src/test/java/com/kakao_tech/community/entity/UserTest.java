@@ -12,7 +12,7 @@ import org.springframework.test.annotation.Rollback;
 import java.util.List;
 
 @SpringBootTest
-class UserEntityTest {
+class UserTest {
 
     @PersistenceContext
     EntityManager entityManager;
