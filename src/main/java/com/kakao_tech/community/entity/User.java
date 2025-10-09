@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.ArrayList;
+
 @Entity
 @Getter
 @Setter
@@ -26,6 +29,9 @@ public class User {
     @Column(unique = false, nullable = true, length = 255)
     private String profileUrl;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
+
     protected User() {}
 
     public User(UserDTO.SignUpRequset signUpRequset) {
@@ -43,5 +49,15 @@ public class User {
     public User(String nickname, String email, String password, String profileUrl) {
         this(nickname, email, password);
         this.profileUrl = profileUrl;
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+        post.setUser(this);
+    }
+
+    public void removePost(Post post) {
+        this.posts.remove(post);
+        post.setUser(null);
     }
 }
