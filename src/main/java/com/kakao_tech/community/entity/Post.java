@@ -21,7 +21,7 @@ public class Post {
     @Column(unique = false, nullable = false, columnDefinition = "LONGTEXT")
     private String body;
 
-    @Column(unique = false, nullable = false, length = 255)
+    @Column(unique = false, nullable = true, length = 255)
     private String imageUrl;
 
     @Column(unique = false, nullable = false, columnDefinition = "DATETIME")
@@ -47,6 +47,10 @@ public class Post {
         this.title = title;
         this.body = body;
         this.createdAt = LocalDateTime.now();
+
+        this.commentCnt = 0;
+        this.likesCnt = 0;
+        this.viewsCnt = 0;
 
         this.user = user;
     }
