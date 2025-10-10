@@ -92,6 +92,7 @@ public class UserDTO {
             }
 
             // TODO : 닉네임 검사 로직 완성 필요.
+            // 닉네임: ㄱ <- 이러면 안됨.
             // 닉네임 숫자, 영어, 한글을 제외한 나머지는 안됨
         }
 
@@ -120,7 +121,7 @@ public class UserDTO {
             }
 
             // TODO : 비밀번호 몇글자까지 허용할건지 확인 필요함.
-            if (password.length() < 20) {
+            if (password.length() > 20) {
                 throw new IllegalArgumentException("비밀번호는 X자를 초과할 수 없습니다.");
             }
 
