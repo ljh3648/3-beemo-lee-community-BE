@@ -18,12 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO.SignUpResponse createUser(UserDTO.SignUpRequset signUpRequset) {
-        User user = new User(signUpRequset);
-        // 유저 정보 데이터베이스에 저장
+    public UserDTO.SignUpResponse createUser(UserDTO.SignUpRequest userDTO) {
+        User user = new User(userDTO.getNickname(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getProfileUrl());
         user = userRepository.save(user);
 
         return new UserDTO.SignUpResponse(user);
     }
-
 }
