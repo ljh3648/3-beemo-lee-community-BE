@@ -34,12 +34,6 @@ public class User {
 
     protected User() {}
 
-    public User(UserDTO.SignUpRequset signUpRequset) {
-        this.nickname = signUpRequset.getNickname();
-        this.email = signUpRequset.getEmail();
-        this.password = signUpRequset.getPassword();
-    }
-
     public User(String nickname, String email, String password) {
         this.nickname = nickname;
         this.email = email;
