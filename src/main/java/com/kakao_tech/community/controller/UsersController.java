@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class UserController {
+public class UsersController {
 
     public final UserService userService;
 
     @Autowired
-    UserController(UserService userService) {
+    UsersController(UserService userService) {
         this.userService = userService;
     }
 
+    // 회원가입 기능
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody Map<String, String> body) {
         // 원래 DTO로 받았는데 그러면 try catch 문에서 예외처리가 안걸림.
@@ -75,7 +76,8 @@ public class UserController {
                 return ResponseEntity.status(400).body(errorDTO);
             }
 
-            return ResponseEntity.status(500).body(null);
+            errorDTO = new ErrorDTO("ERROR_NOT_DEFINE", "예상하지 못한 서버 오류입니다.");
+            return ResponseEntity.status(500).body(errorDTO);
         }
     }
 }
