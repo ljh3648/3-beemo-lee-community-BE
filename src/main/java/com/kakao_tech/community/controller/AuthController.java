@@ -1,6 +1,7 @@
 package com.kakao_tech.community.controller;
 
 import com.kakao_tech.community.dto.SessionDTO;
+import com.kakao_tech.community.dto.UserDTO;
 import com.kakao_tech.community.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,8 @@ public class AuthController {
 
         // 일단 서비스에 넘기자
         try {
-            SessionDTO sessionDTO = authService.createSession(body.get("email"), body.get("password"));
+            UserDTO.SignInRequest userDTO = new UserDTO.SignInRequest(body.get("email"), body.get("password"));
+            SessionDTO sessionDTO = authService.createSession(userDTO);
 
             // 7. 세션 만들어진거 유저한테 넘겨야지 헤더로
             return ResponseEntity.status(201)
