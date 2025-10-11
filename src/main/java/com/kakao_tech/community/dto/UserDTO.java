@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import java.util.regex.Pattern;
 
-
-// TODO : 비밀번호 해시로 저장 필요
-// 데이터베이스에 저장할 때 또는 비밀번호 비교할 때
 public class UserDTO {
     @Getter
     public static class SignUpRequest {
