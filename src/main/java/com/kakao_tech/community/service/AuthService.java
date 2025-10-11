@@ -6,6 +6,7 @@ import com.kakao_tech.community.entity.Session;
 import com.kakao_tech.community.entity.User;
 import com.kakao_tech.community.repository.SessionRepository;
 import com.kakao_tech.community.repository.UserRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +32,7 @@ public class AuthService {
             throw new InvalidParameterException("그런 이메일 가진 유저 없음");
         }
 
-        // TODO : 비밀번호 비크립트로 비교해야함.
-        if (!user.getPassword().equals(userDTO.getPassword())) {
+        if (!BCrypt.checkpw(userDTO.getPassword(), user.getPassword())) {
             throw new InvalidParameterException("비밀번호 틀림");
         }
 
