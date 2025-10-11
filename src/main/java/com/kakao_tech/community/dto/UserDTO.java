@@ -110,8 +110,6 @@ public class UserDTO {
             }
         }
 
-        // TODO : 이메일 검사 로직 완성 필요.
-        // 이메일 길이는 320자 이하 (내 기준)
         public static void emailValidation(String email) {
             // 이메일 null 또는 공백 검사
             if (email == null || email.isBlank()) {
@@ -121,6 +119,11 @@ public class UserDTO {
             // 이메일 길이 검사
             if (email.length() > 320) {
                 throw new IllegalArgumentException("이메일은 320자를 초과할 수 없습니다.");
+            }
+
+            // TODO : 이메일 정규식 검토 필요.
+            if (!Pattern.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", email)) {
+                throw new IllegalArgumentException("이메일 양식이 올바르지 않습니다.");
             }
         }
 
