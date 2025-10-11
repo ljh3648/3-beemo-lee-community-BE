@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.regex.Pattern;
 
+
+// TODO : 비밀번호 해시로 저장 필요
+// 데이터베이스에 저장할 때 또는 비밀번호 비교할 때
 public class UserDTO {
     @Getter
     public static class SignUpRequest {
@@ -24,7 +27,6 @@ public class UserDTO {
 
             this.nickname = nickname;
             this.email = email;
-            // TODO : 비밀번호는 해시 알고리즘을 사용해서 저장해야함. #1
             this.password = password;
         }
 
@@ -47,7 +49,6 @@ public class UserDTO {
 
         public void setPassword(String password) {
             UserValidation.passwordValidation(password);
-            // TODO : 비밀번호는 해시 알고리즘을 사용해서 저장해야함. #2
             this.password = password;
         }
 
@@ -91,13 +92,8 @@ public class UserDTO {
         }
     }
 
-    /*
-        TODO : 주석 멋지게 달아보고 싶다.
-        유저의 정보 닉네임, 이메일, 비밀번호 양식을 검사하고
-        이상이 있으면 IllegalArgumentException 반환을 이르킴
-     */
+    // 닉네임 검증 로직
     public static class UserValidation {
-        // 닉네임 검증 로직
         public static void nicknameValidation(String nickname) {
             // 닉네임 null 또는 공백 검사
             if (nickname == null || nickname.isBlank()) {
@@ -114,7 +110,8 @@ public class UserDTO {
             }
         }
 
-        // 이메일 검증 로직
+        // TODO : 이메일 검사 로직 완성 필요.
+        // 이메일 길이는 320자 이하 (내 기준)
         public static void emailValidation(String email) {
             // 이메일 null 또는 공백 검사
             if (email == null || email.isBlank()) {
@@ -125,31 +122,25 @@ public class UserDTO {
             if (email.length() > 320) {
                 throw new IllegalArgumentException("이메일은 320자를 초과할 수 없습니다.");
             }
-
-            // TODO : 이메일 검사 로직 완성 필요.
-            // 이메일 양식이 맞는지 뭐 @가 있는지나 이메일 특수문자 되나?
-            // 이메일은 숫자 영어만 몇몇개의 특수기호만 되지 않을까 싶다.
-            // 그리고 유효한 도메인인지 확인도 필요할 듯
         }
 
+
+        // TODO : 비밀번호 검사 로직 완성 필요.
+        // 비밀번호는 8자 이상 20자 이하 대문자,소문자,숫자,특수문자를 각각 최소 1개를 포함해야한다. (요구사항)
+        // 숫자, 영어(소문자, 대문자), 특수문자 아스키코드 10진수 (33 ~ 47, 58 ~ 64, 91 ~ 96, 123 ~ 126) (내 기준)
         public static void passwordValidation(String password) {
             // 비밀번호 NULL 또는 공백 검사
             if (password == null || password.isBlank()) {
                 throw new IllegalArgumentException("패스워드 NULL 오류.");
             }
 
-            // TODO : 비밀번호 몇글자까지 허용할건지 확인 필요함.
             if (password.length() > 20) {
                 throw new IllegalArgumentException("비밀번호는 X자를 초과할 수 없습니다.");
             }
-
-            // TODO : 비밀번호 검사 로직 완성 필요.
-            // 패스워드는 영어 대소문자 그리고 숫자 그리고 몇개의 특수문자만 되는걸로 아는데 이건
-            // 도메인 마음대로 하면 될 듯.
         }
 
+        // TODO : 프로필 주소 검증 로직이 필요할텐데, 지금은 바이너리값으로 받기만 할 예정이라서 Url이 아닐 수도 있음. 좀더 디벨롭 필요함.
         public static void profileUrlValidation(String profileUrl) {
-            // TODO : 프로필 주소 검증 로직이 필요하기도 하고, 지금은 아마 바이너리 값을 통째로 저장하려하지 않을까 싶음.
         }
     }
 }
