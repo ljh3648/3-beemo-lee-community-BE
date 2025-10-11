@@ -1,6 +1,7 @@
 package com.kakao_tech.community.service;
 
 import com.kakao_tech.community.dto.SessionDTO;
+import com.kakao_tech.community.dto.UserDTO;
 import com.kakao_tech.community.entity.Session;
 import com.kakao_tech.community.entity.User;
 import com.kakao_tech.community.repository.SessionRepository;
@@ -23,10 +24,9 @@ public class AuthService {
         this.sessionRepository = sessionRepository;
     }
 
-    public User authenticateUser(String email, String password) {
-        // TODO : 인자로 넘겨받은 패스워드랑 비밀번호가 NULL이거나 공백이면 어떻게 되는건지 실험해봐야곘다.
+    public User authenticateUser(UserDTO.SignInRequest userDTO) {
         // 일단 이메일 있는지 찾자 v
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(userDTO.getEmail());
 
         // 이메일로 유저를 찾았는데 없을 수도 있음 그럼 확인해봐야지 v
         if (user == null) {
@@ -37,7 +37,7 @@ public class AuthService {
         // 3. 위에 아무튼 뭐가 잘못됐으면 뭐가 이상하다고 쓰로잉해야지 v
 
         // 여기에서는 찾은 유저의 이메일에서 비밀번호랑 파라미터로 넘겨받은 비밀번호랑 비교해야함. v
-        if (!user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(userDTO.getPassword())) {
             throw new InvalidParameterException("비밀번호 틀림");
         }
 
@@ -47,14 +47,14 @@ public class AuthService {
     // TODO : 세션 제대로 만들기
     // 여기에 세션 등록하는 서비스 만들어야함
     // 근데 여기 세션 만드는건데, 왜 인증도 같이하는거지? 메서드로 분리해야겠다. v
-    public SessionDTO createSession(String email, String password) {
+    public SessionDTO createSession(UserDTO.SignInRequest userDTO) {
         // 1. 일단 데이터베이스에서 유저테이블에서 입력받은 이메일 유저가 있는지 찾기 v
         // 1.1. 음 User 레퍼지토리 이용해서 이미 그 비교하는거 있으니까 그거 쓰면 될거같은데 v
         // 1.2  비밀번호 일치하는지도 추가하고 v
         // 1.3 컨트롤러에서 이메일이랑 비밀번호 넘겨 받아야지 v
         // 1.4 해당 양식이 필요하겠네 DTO 만들까? 일단 대충 받자 그냥 v - todo에 추가하자
 
-        User user = authenticateUser(email, password);
+        User user = authenticateUser(userDTO);
 
         // 4. 근데 이메일과 비밀번호가 일치하면 이제 세션 만들어야지 v
         // 5. 세션 어떻게 만들지? v
