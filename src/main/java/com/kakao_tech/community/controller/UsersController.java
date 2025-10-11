@@ -91,8 +91,6 @@ public class UsersController {
                 return ResponseEntity.status(400).body(errorDTO);
             }
 
-            // TODO : 비밀번호 검증 예외처리 추가
-
             errorDTO = new ErrorDTO("ERROR_NOT_DEFINE", "예상하지 못한 서버 오류입니다.");
             return ResponseEntity.status(500).body(errorDTO);
         }
