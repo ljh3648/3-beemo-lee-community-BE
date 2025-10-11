@@ -86,6 +86,11 @@ public class UsersController {
                 return ResponseEntity.status(400).body(errorDTO);
             }
 
+            if (e.getMessage().equals("비밀번호 양식이 올바르지 않습니다.")) {
+                errorDTO = new ErrorDTO("ERROR_PASSWORD", e.getMessage());
+                return ResponseEntity.status(400).body(errorDTO);
+            }
+
             // TODO : 비밀번호 검증 예외처리 추가
 
             errorDTO = new ErrorDTO("ERROR_NOT_DEFINE", "예상하지 못한 서버 오류입니다.");

@@ -121,24 +121,19 @@ public class UserDTO {
                 throw new IllegalArgumentException("이메일은 320자를 초과할 수 없습니다.");
             }
 
-            // TODO : 이메일 정규식 검토 필요.
             if (!Pattern.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", email)) {
                 throw new IllegalArgumentException("이메일 양식이 올바르지 않습니다.");
             }
         }
 
-
-        // TODO : 비밀번호 검사 로직 완성 필요.
-        // 비밀번호는 8자 이상 20자 이하 대문자,소문자,숫자,특수문자를 각각 최소 1개를 포함해야한다. (요구사항)
-        // 숫자, 영어(소문자, 대문자), 특수문자 아스키코드 10진수 (33 ~ 47, 58 ~ 64, 91 ~ 96, 123 ~ 126) (내 기준)
         public static void passwordValidation(String password) {
             // 비밀번호 NULL 또는 공백 검사
             if (password == null || password.isBlank()) {
                 throw new IllegalArgumentException("패스워드 NULL 오류.");
             }
 
-            if (password.length() > 20) {
-                throw new IllegalArgumentException("비밀번호는 X자를 초과할 수 없습니다.");
+            if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$",  password)) {
+                throw new IllegalArgumentException("비밀번호 양식이 올바르지 않습니다.");
             }
         }
 
