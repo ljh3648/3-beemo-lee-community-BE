@@ -76,6 +76,15 @@ public class UsersController {
                 return ResponseEntity.status(400).body(errorDTO);
             }
 
+            if (e.getMessage().equals("닉네임은 숫자, 영어, 한글 입력만 가능합니다.")) {
+                errorDTO = new ErrorDTO("ERROR_NICKNAME", e.getMessage());
+                return ResponseEntity.status(400).body(errorDTO);
+            }
+
+            // TODO : 비밀번호 검증 예외처리 추가
+
+            // TODO : 이메일 검증 예외처리 추가
+
             errorDTO = new ErrorDTO("ERROR_NOT_DEFINE", "예상하지 못한 서버 오류입니다.");
             return ResponseEntity.status(500).body(errorDTO);
         }
