@@ -73,6 +73,22 @@ public class UserDTO {
         }
     }
 
+    @Getter
+    public static class SignInRequest {
+        private String email;
+        private String password;
+
+        protected SignInRequest() {}
+
+        public SignInRequest(String email, String password) {
+            UserValidation.emailValidation(email);
+            UserValidation.passwordValidation(password);
+
+            this.email = email;
+            this.password = password;
+        }
+    }
+
     /*
         TODO : 주석 멋지게 달아보고 싶다.
         유저의 정보 닉네임, 이메일, 비밀번호 양식을 검사하고
