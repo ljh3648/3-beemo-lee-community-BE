@@ -4,6 +4,8 @@ import com.kakao_tech.community.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.regex.Pattern;
+
 public class UserDTO {
     @Getter
     public static class SignUpRequest {
@@ -107,9 +109,9 @@ public class UserDTO {
                 throw new IllegalArgumentException("닉네임 글자는 최대 10글자 입니다.");
             }
 
-            // TODO : 닉네임 검사 로직 완성 필요.
-            // 닉네임: ㄱ <- 이러면 안됨.
-            // 닉네임 숫자, 영어, 한글을 제외한 나머지는 안됨
+            if(!Pattern.matches("[0-9a-zA-Z가-힣]*$", nickname)) {
+                throw new IllegalArgumentException("닉네임은 숫자, 영어, 한글 입력만 가능합니다.");
+            }
         }
 
         // 이메일 검증 로직
