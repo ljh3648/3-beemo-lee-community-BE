@@ -92,4 +92,42 @@ public class AuthService {
         // 세션DTO 만들어서 넘기자. v
         return new SessionDTO(result.getSessionKey(), result.getExpiredAt());
     }
+
+    // 세션 파괴하려면 순서는?
+    // 세션키값의 유저를 찾는다.
+    // 삭제한다.
+    public boolean deleteSession(String sessionKey) {
+        // 세션키 값의 유저를 찾는다.
+        // 근데 어떤 값을 파라미터로 받아오지?
+        // 세션키값? 아니면 DTO?
+        // 근데 세션키값은 유니크 하지 않고, 그냥 session_id도 같이 받아서 그 아이디 기본키 값으로 찾아서
+        // 추적하면 되지 않을까 싶은데
+        // 기본키가 오토로 자동증가 하면 관리가 까다롭겠네
+        // 일단 만들자
+
+        // 원래는 여기에서 세션 널값을 체크 해야하는거 같은데, 컨트롤 부분에서 해버렸으니...
+        // 수정 필요할듯
+
+        System.out.println("DELETING SESSION: " + sessionKey);
+
+         Session session = sessionRepository.findBySessionKey(sessionKey);
+
+         if (session == null) {
+             throw new InvalidParameterException("일치된 세션 없음");
+         }
+
+         sessionRepository.delete(session);
+//        if (!sessionRepository.existsBySessionKey(sessionKey)) {
+//            throw new IllegalArgumentException("인증된 세션이 없음.");
+//        }
+
+        // 어떤 값을 리턴해줘야 할까?
+        // 음 그냥 성공 유무만 리턴해주면 될거 같은데?
+        // 참일땐 세션 찾아서 삭제한거고
+        // 거짓일땐 세션을 못찾거나 오류로 인해서 삭제를 못한거고
+        // 근데 오류일떄는 오류를 던지는게 맞는거 같고.
+        // 세션을 못찾아서 삭제에 실패했다고 넘기는게 맞나?
+        // 리턴 값은 좀더 고민해보자.
+        return true;
+    }
 }
