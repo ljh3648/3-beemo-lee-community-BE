@@ -36,6 +36,30 @@ public class UsersController {
                             body.get("profileUrl")
                             );
 
+            // 임시로 이미지 처리 구현 중
+            // base64로 디코딩 해야함
+            // 저장은 어디에다가 하지? 당연히 로컬 서버에 저장을 해둬야지 아니면 데이터베이스
+            String image = body.get("profile");
+            System.out.println(image);
+
+            // 일단 가져오긴 했는데, 용량이 엄청 큰건 커트를 해야하는데 서버 자체적으로
+            // 요청 응답 크기를 제한 할 수 있나?
+            // 아니면, HTTP 통신으로 보낼 수 있는 용량 제한같은게 있지 않을까?
+
+            // 1. 일단 서버에 들어오는 용량을 제한을 한다.
+            // 서버는 요청을 받는다.
+            // 서버는 요청 메세지 크기를 사전에 알아차린다.
+            // 그런 로직이 있겠지 뭐
+            // 그래서 그 요청 메세지가 너무 크면 예외처리로 나쁜 요청이라고 냅다 보낸다
+
+            // 결론
+            // 요청 크기를 어떻게 제한할건가?
+            // 톰캣서버에서 알아서 걸러지도록 yml 설정. -> 그러면 전역적으로 설정됨
+            // 필터를 통해서 걸러지도록 설정. -> 제일 베스트인듯
+            // 인터레트로 걸러지도록 설정. -> 이러면 이미 바디를 읽어온 느낌인거 같아서 안될듯.
+
+
+
             UserDTO.SignUpResponse result = userService.createUser(userDTO);
             return ResponseEntity.status(201).body(result);
         } catch (IllegalArgumentException e) {
