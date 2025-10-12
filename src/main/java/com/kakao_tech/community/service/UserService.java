@@ -18,6 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    // TODO : 프로필 사진 어떻게 저장할건지?
     public UserDTO.SignUpResponse createUser(UserDTO.SignUpRequest userDTO) {
         if (userRepository.existsByNickname(userDTO.getNickname())) {
             throw new IllegalArgumentException("중복된 유저 닉네임 입니다.");
