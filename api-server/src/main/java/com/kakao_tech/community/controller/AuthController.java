@@ -25,7 +25,8 @@ public class AuthController {
     @GetMapping("/sessions")
     public ResponseEntity<?> verificationSession(@RequestHeader(value = "Cookie", required = false) String cookie) {
         try {
-            // TODO: 세션 값 인증로직 추가 필요!!
+            SessionDTO.RequestCookie sessionDTO = new SessionDTO.RequestCookie(cookie);
+            authService.verificationSession(sessionDTO);
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).build();

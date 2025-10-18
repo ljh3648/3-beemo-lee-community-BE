@@ -70,4 +70,11 @@ public class AuthService {
          sessionRepository.delete(session);
         return true;
     }
+
+    public void verificationSession(SessionDTO.RequestCookie sessionDTO) {
+        Session session = sessionRepository.findBySessionKey(sessionDTO.getSessionKey());
+        if (session == null) {
+            throw new InvalidParameterException("일치된 세션 없음");
+        }
+    }
 }
