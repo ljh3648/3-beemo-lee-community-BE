@@ -21,6 +21,17 @@ public class AuthController {
     }
 
     // TODO : 세션 진짜 개선 많이 해야함.
+    // 세션 값 확인.
+    @GetMapping("/sessions")
+    public ResponseEntity<?> verificationSession(@RequestHeader(value = "Cookie", required = false) String cookie) {
+        try {
+            // TODO: 세션 값 인증로직 추가 필요!!
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).build();
+        }
+    }
+
     // 세션 등록 (로그인)
     @PostMapping("/sessions")
     public ResponseEntity<?> createSession(@RequestBody Map<String, String> body) {
@@ -30,7 +41,7 @@ public class AuthController {
             SessionDTO.ResponseCookie sessionDTO = authService.createSession(userDTO);
 
             return ResponseEntity.status(201)
-                    .header("Set-Cookie", "SESSION_KEY=" + sessionDTO.getSessionKey() + "; HttpOnly; Path=/")
+                    .header("Set-Cookie", "SESSION_KEY=" + sessionDTO.getSessionKey() + "; Path=/; HttpOnly;")
                     .build();
         } catch (IllegalArgumentException e) {
             // TODO : 예외처리 추가 필요.
@@ -44,11 +55,12 @@ public class AuthController {
         try {
             SessionDTO.RequestCookie sessionDTO = new SessionDTO.RequestCookie(cookie);
             authService.deleteSession(sessionDTO);
+            return ResponseEntity.status(204)
+                    .header("Set-Cookie", "SESSION_ID=; Max-Age=0; Path=/; HttpOnly")
+                    .build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).build();
         }
-
-        return ResponseEntity.status(204).header("Set-Cookie", "SESSION_ID=; Max-Age=0; Path=/; Secure; HttpOnly").build();
     }
 
 }
