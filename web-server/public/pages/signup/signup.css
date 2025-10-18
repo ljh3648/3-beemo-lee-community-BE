@@ -1,0 +1,62 @@
+body {
+    background-color: #FBFBFB;
+}
+
+p {
+    color: black;
+    margin: 0px;
+    padding: 0px;
+    font-size: 15px;
+}
+
+.page {
+    background-color: #E7E7E7;
+    width: 402px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 200px;
+}
+
+.layer1 {
+    /* background-color: red; */
+    padding-left: 30px;
+    padding-top: 180px;
+}
+
+.layer2 {
+    /* background-color: blue; */
+    padding-top: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.layer3 {
+    /* background-color: green; */
+    padding-top: 70px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.input-box {
+    /* background-color: black; */
+    background-color: white;
+    height: 44px;
+    width: 100%;
+    margin-top: 7px;
+    border: 0px;
+    border-radius: 5px;
+
+}
+
+.button {
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 100%;
+    border: 0px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
+}
