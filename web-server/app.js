@@ -3,13 +3,25 @@ const app = express()
 const port = 3000
 const path = require('path')
 
-app.use(express.static('public/assets/'))
-app.use(express.static('public/components/'))
-
 // 페이지 라우팅
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+app.get('/signin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/signin/index.html'));
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/signup/index.html'));
+});
+
+app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/home/index.html'));
 });
+
+app.use(express.static('public/'))
+app.use(express.static('public/pages/'))
 
 app.use((req, res) => {
   res.status(404).send('페이지를 찾을 수 없습니다.');
