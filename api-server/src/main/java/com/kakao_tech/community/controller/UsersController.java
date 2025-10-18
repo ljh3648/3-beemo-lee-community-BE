@@ -22,7 +22,7 @@ public class UsersController {
     }
 
     // 회원가입 기능
-    @PostMapping("/users")
+    @PostMapping("/api/users")
     public ResponseEntity<?> createUser(@RequestBody Map<String, String> body) {
         // 원래 DTO로 받았는데 그러면 try catch 문에서 예외처리가 안걸림.
         // TODO : 추후에 전역 핸들러를 통해서 예외처리 필요, 서비스에서 여기는 정상 응답만 반환하기.

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     public final AuthService authService;
@@ -29,6 +29,7 @@ public class AuthController {
             authService.verificationSession(sessionDTO);
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(400).build();
         }
     }
