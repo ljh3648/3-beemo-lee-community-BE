@@ -1,13 +1,20 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const path = require('path')
 
-app.use(express.static('public'))
+app.use(express.static('public/assets/'))
+app.use(express.static('public/components/'))
 
-app.get('/about', (req, res) => {
-  res.send('카카오테크 부트캠프 클라우드과정 커뮤니티 만들어보기 프로젝트입니다.')
-})
+// 페이지 라우팅
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/home/index.html'));
+});
+
+app.use((req, res) => {
+  res.status(404).send('페이지를 찾을 수 없습니다.');
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-}) 
+})   
