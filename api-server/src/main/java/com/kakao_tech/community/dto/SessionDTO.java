@@ -16,7 +16,6 @@ public class SessionDTO {
 
         public RequestCookie(String cookie) {
             // 쿠키를 파싱하는 과정이 필요함.
-
             // 쿠키가 null 이거나 공백인것을 먼저 잡는게 좋을거 같다.
             if (cookie.isEmpty()) {
                 throw new IllegalArgumentException("쿠키 비어있음");
@@ -26,8 +25,9 @@ public class SessionDTO {
             String[] cookieArray = cookie.split(";");
 
             for (String arr : cookieArray) {
-                if (arr.split("=")[0].equals("SESSION_KEY")) {
-                    this.sessionKey = arr.split("=")[1];
+                String[] keyValue = arr.trim().split("=");
+                if (keyValue[0].equals("SESSION_KEY")) {
+                    this.sessionKey = keyValue[1];
                     break;
                 }
             }
