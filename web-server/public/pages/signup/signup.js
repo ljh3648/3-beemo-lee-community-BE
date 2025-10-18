@@ -6,7 +6,7 @@ document.getElementById('form').addEventListener('submit', async function (e) {
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://localhost:8080/users', {
+        const response = await fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

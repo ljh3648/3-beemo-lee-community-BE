@@ -5,7 +5,7 @@ document.getElementById('form').addEventListener('submit', async function (e) {
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://localhost:8080/auth/sessions', {
+        const response = await fetch('/api/auth/sessions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,6 +18,7 @@ document.getElementById('form').addEventListener('submit', async function (e) {
         });
 
         if (response.status === 201) {
+            alert("로그인 성공");
             window.location.href = '/';
         } else {
             alert("로그인 실패");
