@@ -1,3 +1,18 @@
 .header-container {
-    border-bottom: 1px solid black;
+    height: 115px; 
+    border-bottom: 3px solid black;
+}
+
+.header-container p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-container .title {
+    padding-top: 30px;
+    padding-left: 30px;
+
+    font-size: 34px;
+    font-weight: 800;
+    color: #0348C9;
 }
