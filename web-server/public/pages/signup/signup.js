@@ -4,6 +4,11 @@ document.getElementById('form').addEventListener('submit', async function (e) {
     const nickname = document.getElementById('nickname').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const passwordRe = document.getElementById('password-re').value;
+    
+    // TODO : 패스워드 재확인 검증 기능 추가 필요.
+    // 패스워드 재 확인 필요. - 클라이언트에서도 하고 서버에서도 하고
+    // 클라이언트는 기본적으로 믿지 않는다! 클라이언트에서 확인하고, 서버에서도 확인한다.
 
     try {
         const response = await fetch('/api/users', {

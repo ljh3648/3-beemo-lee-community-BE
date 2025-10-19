@@ -3,34 +3,56 @@
 
 <head>
     <link href="/assets/css/global.css" rel="stylesheet">
-    <title>아무말대잔치</title>
+    <link href="/assets/css/sign/sign.css" rel="stylesheet">
+    <title>회원가입</title>
 </head>
 
 <body>
     <header></header>
     <script src="/components/header/header.js"></script>
 
-    <p>회원가입</p>
+    <!-- 로그인페이지 전체 영역 -->
+    <div class="container">
+        <h1 class="sign-title">회원가입</h1>
 
-    <form id="form">
-        <p>닉네임</p>
-        <input type="text" id="nickname" name="nickname" maxlength="10" required>
-        <div style="height: 30px;"></div>
+        <!-- TODO : 사용자 프로필 추가 필요 -->
 
-        <p>이메일</p>
-        <input type="text" id="email" name="email" maxlength="320" required>
-        <div style="height: 30px;"></div>
+        <!-- 폼 -->
+        <form id="form">
+            <!-- 이메일 입력 -->
+            <div class="input-container">
+                <h2 class="input-lable">닉네임</h2>
+                <input class="input-box" id="nickname" type="nickname" name="'nickname" maxlength="10"
+                    placeholder="z지존파워z" required>
+            </div>
 
-        <p>비밀번호</p>
-        <input type="password" id="password" name="password" required>
-        <br></br>
-        
-        <button type="submit">
-            확인
-        </button>
-    </form>
+            <!-- 이메일 입력 -->
+            <div class="input-container">
+                <h2 class="input-lable">이메일</h2>
+                <input class="input-box" id="email" type="email" name="'email" maxlength="320"
+                    placeholder="example@email.com" required>
+            </div>
 
-    <script src="/pages/signup/signup.js"></script>
+            <!-- 비밀번호 입력 -->
+            <div class="input-container">
+                <h2 class="input-lable">비밀번호</h2>
+                <input class="input-box" id="password" type="password" name="password" autocomplete="off" required>
+            </div>
+
+            <!-- 비밀번호 입력 -->
+            <div class="input-container">
+                <h2 class="input-lable">비밀번호 확인</h2>
+                <input class="input-box" id="password-re" type="password" name="password-re" autocomplete="off" required>
+            </div>
+
+            <!-- 회원정보 전송 -->
+            <button class="form-button" type="submit">
+                회원가입
+            </button>
+        </form>
+
+        <script src="/pages/signup/signup.js"></script>
+    </div>
 </body>
 
 </html>

@@ -19,7 +19,7 @@ document.getElementById('form').addEventListener('submit', async function (e) {
 
         if (response.status === 201) {
             alert("로그인 성공");
-            window.location.href = '/';
+            window.location.href = '/home';
         } else {
             alert("로그인 실패");
         }
