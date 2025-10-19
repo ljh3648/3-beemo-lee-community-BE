@@ -1,5 +1,8 @@
 .header-container {
-    height: 115px; 
+    height: 50px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
     border-bottom: 3px solid black;
 }
 
@@ -9,9 +12,6 @@
 }
 
 .header-container .title {
-    padding-top: 30px;
-    padding-left: 30px;
-
     font-size: 34px;
     font-weight: 800;
     color: #0348C9;
