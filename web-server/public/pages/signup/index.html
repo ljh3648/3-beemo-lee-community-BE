@@ -4,6 +4,7 @@
 <head>
     <link href="/assets/css/global.css" rel="stylesheet">
     <link href="/assets/css/sign/sign.css" rel="stylesheet">
+    <link href="/pages/signup/signup.css" rel="stylesheet">
     <title>회원가입</title>
 </head>
 
@@ -15,7 +16,15 @@
     <div class="container">
         <h1 class="sign-title">회원가입</h1>
 
-        <!-- TODO : 사용자 프로필 추가 필요 -->
+        <!-- 프로필 선택 -->
+        <div class="profile-section">
+            <label for="profile-upload" class="profile-upload-label">
+                <div class="profile-circle">
+                    <span class="profile-placeholder">+</span>
+                </div>
+            </label>
+            <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+        </div>
 
         <!-- 폼 -->
         <form id="form">
