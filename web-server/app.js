@@ -20,6 +20,18 @@ app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/home/index.html'));
 });
 
+app.get('/posts/create', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/posts/create/index.html'));
+});
+
+app.get('/posts/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/posts/detail/index.html'));
+});
+
+app.get('/posts/:id/edit', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/posts/edit/index.html'));
+});
+
 app.use(express.static('public/'))
 app.use(express.static('public/pages/'))
 
