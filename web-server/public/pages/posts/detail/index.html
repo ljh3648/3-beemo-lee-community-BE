@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="/assets/css/global.css" rel="stylesheet">
+    <link href="/pages/posts/detail/detail.css" rel="stylesheet">
+    <title>아무말 대잔치</title>
+</head>
+
+<body>
+    <header></header>
+    <script src="/components/header/header.js"></script>
+
+    <div class="detail-container">
+
+        <!-- 게시글 제목 -->
+        <h2 class="post-title" id="post-title">제목 1</h2>
+
+        <!-- 작성자 정보 -->
+        <div class="author-section">
+            <div class="author-profile"></div>
+            <div class="author-info">
+                <span class="author-name" id="author-name">더미 작성자 1</span>
+                <span class="post-date" id="post-date">2021-01-01 00:00:00</span>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn">수정</button>
+                <button class="action-btn">삭제</button>
+            </div>
+        </div>
+
+        <!-- 게시글 이미지 -->
+        <div class="post-image-container" id="post-image-container">
+            <div class="post-image-placeholder"></div>
+        </div>
+
+        <!-- 게시글 본문 -->
+        <div class="post-content" id="post-content">
+            더미 내용입니다.
+        </div>
+
+        <!-- 좋아요/조회수/댓글 통계 -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number" id="likes-count">123</div>
+                <div class="stat-label">좋아요수</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="views-count">123</div>
+                <div class="stat-label">조회수</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="comments-count">123</div>
+                <div class="stat-label">댓글</div>
+            </div>
+        </div>
+
+        <!-- 댓글 입력 -->
+        <div class="comment-input-section">
+            <textarea class="comment-input" id="comment-input" placeholder="댓글을 남겨주세요!"></textarea>
+            <button class="comment-submit" id="comment-submit">댓글 등록</button>
+        </div>
+
+        <!-- 댓글 목록 -->
+        <div class="comments-section" id="comments-section">
+            <!-- 댓글 1 -->
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-author-profile"></div>
+                    <div class="comment-author-info">
+                        <span class="comment-author-name">더미 작성자 1</span>
+                        <span class="comment-date">2021-01-01 00:00:00</span>
+                    </div>
+                    <div class="comment-actions">
+                        <button class="action-btn">수정</button>
+                        <button class="action-btn">삭제</button>
+                    </div>
+                </div>
+                <div class="comment-content">댓글 내용</div>
+            </div>
+
+            <!-- 댓글 2 -->
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-author-profile"></div>
+                    <div class="comment-author-info">
+                        <span class="comment-author-name">더미 작성자 1</span>
+                        <span class="comment-date">2021-01-01 00:00:00</span>
+                    </div>
+                    <div class="comment-actions">
+                        <button class="action-btn">수정</button>
+                        <button class="action-btn">삭제</button>
+                    </div>
+                </div>
+                <div class="comment-content">댓글 내용</div>
+            </div>
+
+            <!-- 댓글 3 -->
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-author-profile"></div>
+                    <div class="comment-author-info">
+                        <span class="comment-author-name">더미 작성자 1</span>
+                        <span class="comment-date">2021-01-01 00:00:00</span>
+                    </div>
+                    <div class="comment-actions">
+                        <button class="action-btn">수정</button>
+                        <button class="action-btn">삭제</button>
+                    </div>
+                </div>
+                <div class="comment-content">댓글 내용</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/pages/posts/detail/detail.js"></script>
+</body>
+
+</html>
