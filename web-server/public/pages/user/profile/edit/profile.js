@@ -1,3 +1,5 @@
+import { setupProfileImagePreview } from '/utils/dom.js';
+
 // 사용자 정보 불러오기
 const fetchUserProfile = async () => {
     try {
@@ -30,18 +32,8 @@ const fetchUserProfile = async () => {
     }
 };
 
-// 프로필 사진 변경
-document.getElementById('profile-upload').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const profileCircle = document.getElementById('profile-preview');
-            profileCircle.style.backgroundImage = `url(${event.target.result})`;
-        };
-        reader.readAsDataURL(file);
-    }
-});
+// 프로필 사진 미리보기 설정
+setupProfileImagePreview('profile-upload', '#profile-preview');
 
 // 회원정보 수정 폼 제출
 document.getElementById('profile-form').addEventListener('submit', async function(e) {

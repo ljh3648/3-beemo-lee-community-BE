@@ -1,18 +1,112 @@
-.header-container {
+/**
+ * Header Component - BEM 방식
+ * Block: header
+ */
+
+/* Block */
+.header { }
+
+/* Elements - 공통 */
+.header__container {
     height: 50px;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-bottom: 15px;
+    padding: 15px;
     border-bottom: 3px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.header-container p {
-    padding: 0px;
-    margin: 0px;
-}
-
-.header-container .title {
+.header__title {
+    padding: 0;
+    margin: 0;
     font-size: 34px;
     font-weight: 800;
     color: #0348C9;
+    cursor: pointer;
+}
+
+/* Elements - 비인증 유저용 (Guest Navigation) */
+.header__nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header__link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.header__link:hover {
+    background-color: #f5f5f5;
+}
+
+.header__link--primary {
+    background-color: #0348C9;
+    color: white;
+}
+
+.header__link--primary:hover {
+    background-color: #0236a0;
+}
+
+/* Elements - 인증된 유저용 (Profile Section) */
+.header__profile {
+    position: relative;
+}
+
+.header__profile-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #0348C9;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s;
+}
+
+.header__profile-image:hover {
+    opacity: 0.8;
+}
+
+.header__dropdown {
+    display: none;
+    position: absolute;
+    top: 58px;
+    right: 0;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    z-index: 1000;
+}
+
+/* Modifier - 드롭다운 보이기 */
+.header__dropdown--show {
+    display: block;
+}
+
+.header__dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.header__dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.header__dropdown-item:hover {
+    background-color: #f5f5f5;
 }

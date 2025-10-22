@@ -1,0 +1,36 @@
+.btn {
+    display: inline-flex;
+
+    height: 33px;
+    width: 314px;
+
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.btn--primary {
+    background: #0348C9;
+    color: white;
+}
+
+.btn--danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.98);
+}

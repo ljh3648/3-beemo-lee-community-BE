@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class ErrorDTO {
-    private String error;
+    private String code;
     private String message;
 
     protected ErrorDTO(){}
 
-    public ErrorDTO(String error, String message) {
-        this.error = error;
+    public ErrorDTO(String code, String message) {
+        this.code = code;
         this.message = message;
     }
 }

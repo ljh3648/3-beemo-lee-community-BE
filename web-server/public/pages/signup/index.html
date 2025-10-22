@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <link href="/assets/css/global.css" rel="stylesheet">
-    <link href="/assets/css/sign/sign.css" rel="stylesheet">
+    <!-- CSS는 signup.js에서 동적으로 로드됨 (constants/paths.js 참조) -->
     <link href="/pages/signup/signup.css" rel="stylesheet">
     <title>회원가입</title>
 </head>
@@ -12,23 +11,22 @@
     <header></header>
     <script src="/components/header/header.js"></script>
 
-    <!-- 로그인페이지 전체 영역 -->
+    <!-- 회원가입페이지 전체 영역 -->
     <div class="container">
         <h1 class="sign-title">회원가입</h1>
-
         <!-- 프로필 선택 -->
-        <div class="profile-section">
+        <!-- <div class="profile-section">
             <label for="profile-upload" class="profile-upload-label">
                 <div class="profile-circle">
                     <span class="profile-placeholder">+</span>
                 </div>
             </label>
             <input type="file" id="profile-upload" accept="image/*" style="display: none;">
-        </div>
+        </div> -->
 
         <!-- 폼 -->
         <form id="form">
-            <!-- 이메일 입력 -->
+            <!-- 닉네임 입력 -->
             <div class="input-container">
                 <h2 class="input-lable">닉네임</h2>
                 <input class="input-box" id="nickname" type="nickname" name="'nickname" maxlength="10"
@@ -55,12 +53,11 @@
             </div>
 
             <!-- 회원정보 전송 -->
-            <button class="form-button" type="submit">
-                회원가입
-            </button>
+             <example-button type="submit" text="회원가입"></example-button>
+             <script type="module" src="/components/button/button.js"></script>
         </form>
         <a href="/signin">로그인 하러가기</a>
-        <script src="/pages/signup/signup.js"></script>
+        <script type="module" src="/pages/signup/signup.js"></script>
     </div>
 </body>
 
