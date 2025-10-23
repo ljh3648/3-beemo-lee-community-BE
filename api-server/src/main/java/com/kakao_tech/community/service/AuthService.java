@@ -4,6 +4,8 @@ import com.kakao_tech.community.dto.SessionDTO;
 import com.kakao_tech.community.dto.UserDTO;
 import com.kakao_tech.community.entity.Session;
 import com.kakao_tech.community.entity.User;
+import com.kakao_tech.community.exception.CustomErrorCode;
+import com.kakao_tech.community.exception.RestApiException;
 import com.kakao_tech.community.repository.SessionRepository;
 import com.kakao_tech.community.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -29,11 +31,13 @@ public class AuthService {
         User user = userRepository.findByEmail(userDTO.getEmail());
 
         if (user == null) {
-            throw new InvalidParameterException("그런 이메일 가진 유저 없음");
+//            throw new InvalidParameterException("그런 이메일 가진 유저 없음");
+            throw new RestApiException(CustomErrorCode.ERROR_SIGN_IN);
         }
 
         if (!BCrypt.checkpw(userDTO.getPassword(), user.getPassword())) {
-            throw new InvalidParameterException("비밀번호 틀림");
+//            throw new InvalidParameterException("비밀번호 틀림");
+            throw new RestApiException(CustomErrorCode.ERROR_SIGN_IN);
         }
 
         return user;
@@ -64,7 +68,7 @@ public class AuthService {
     public boolean deleteSession(SessionDTO.RequestCookie sessionDTO) {
          Session session = sessionRepository.findBySessionKey(sessionDTO.getSessionKey());
          if (session == null) {
-             throw new InvalidParameterException("일치된 세션 없음");
+             throw new RestApiException(CustomErrorCode.ERROR_SIGN_IN);
          }
 
          sessionRepository.delete(session);
@@ -74,7 +78,7 @@ public class AuthService {
     public void verificationSession(SessionDTO.RequestCookie sessionDTO) {
         Session session = sessionRepository.findBySessionKey(sessionDTO.getSessionKey());
         if (session == null) {
-            throw new InvalidParameterException("일치된 세션 없음");
+            throw new RestApiException(CustomErrorCode.ERROR_SIGN_IN);
         }
     }
 }

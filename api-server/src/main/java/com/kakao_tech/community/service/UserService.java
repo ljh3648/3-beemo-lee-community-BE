@@ -2,6 +2,8 @@ package com.kakao_tech.community.service;
 
 import com.kakao_tech.community.dto.UserDTO;
 import com.kakao_tech.community.entity.User;
+import com.kakao_tech.community.exception.CustomErrorCode;
+import com.kakao_tech.community.exception.RestApiException;
 import com.kakao_tech.community.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-//@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final ImageService imageService;
@@ -21,11 +22,11 @@ public class UserService {
 
     public UserDTO.SignUpResponse createUser(UserDTO.SignUpRequest userDTO, MultipartFile profileImage) {
         if (userRepository.existsByNickname(userDTO.getNickname())) {
-            throw new IllegalArgumentException("중복된 유저 닉네임 입니다.");
+            throw new RestApiException(CustomErrorCode.DUPLICATE_NICKNAME);
         }
 
         if (userRepository.existsByEmail(userDTO.getEmail())) {
-            throw new IllegalArgumentException("중복된 이메일 입니다.");
+            throw new RestApiException(CustomErrorCode.DUPLICATE_EMAIL);
         }
 
         User user = new User(
