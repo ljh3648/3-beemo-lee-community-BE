@@ -34,8 +34,7 @@ public class UsersController {
                 new UserDTO.SignUpRequest(
                         body.get("nickname"),
                         body.get("email"),
-                        body.get("password"),
-                        body.get("profileUrl")
+                        body.get("password")
                 );
 
         // 임시로 이미지 처리 구현 중
@@ -60,7 +59,7 @@ public class UsersController {
         // 필터를 통해서 걸러지도록 설정. -> 제일 베스트인듯
         // 인터레트로 걸러지도록 설정. -> 이러면 이미 바디를 읽어온 느낌인거 같아서 안될듯.
         
-        UserDTO.SignUpResponse result = userService.createUser(userDTO);
+        UserDTO.SignUpResponse result = userService.createUser(userDTO, profileImage);
         return ResponseEntity.status(201).body(result);
     }
 
