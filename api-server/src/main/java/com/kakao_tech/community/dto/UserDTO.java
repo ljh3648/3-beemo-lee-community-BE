@@ -29,8 +29,6 @@ public class UserDTO {
 
         public SignUpRequest(String nickname, String email, String password, String profileUrl) {
             this(nickname, email, password);
-            // 유저 이메일 검증 로직
-            UserValidation.profileUrlValidation(profileUrl);
             this.profileUrl = profileUrl;
         }
 
@@ -50,7 +48,6 @@ public class UserDTO {
         }
 
         public void setProfileUrl(String profileUrl) {
-            UserValidation.profileUrlValidation(profileUrl);
             this.profileUrl = profileUrl;
         }
     }
@@ -132,10 +129,6 @@ public class UserDTO {
             if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$",  password)) {
                 throw new IllegalArgumentException("비밀번호 양식이 올바르지 않습니다.");
             }
-        }
-
-        // TODO : 프로필 주소 검증 로직이 필요할텐데, 지금은 바이너리값으로 받기만 할 예정이라서 Url이 아닐 수도 있음. 좀더 디벨롭 필요함.
-        public static void profileUrlValidation(String profileUrl) {
         }
     }
 }

@@ -19,12 +19,9 @@ import java.util.Map;
 public class UsersController {
 
     public final UserService userService;
-    public final ImageService imageService;
-
     @Autowired
-    UsersController(UserService userService, ImageService imageService) {
+    UsersController(UserService userService) {
         this.userService = userService;
-        this.imageService = imageService;
     }
 
     // 회원가입 기능
@@ -41,8 +38,8 @@ public class UsersController {
                             body.get("password")
                             );
 
-            imageService.uploadImage(profileImage);
-            UserDTO.SignUpResponse result = userService.createUser(userDTO);
+            UserDTO.SignUpResponse result = userService.createUser(userDTO, profileImage);
+
             return ResponseEntity.status(201).body(result);
         } catch (IllegalArgumentException e) {
             ErrorDTO errorDTO;
