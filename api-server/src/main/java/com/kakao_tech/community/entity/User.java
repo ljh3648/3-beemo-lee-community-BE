@@ -1,6 +1,5 @@
 package com.kakao_tech.community.entity;
 
-import com.kakao_tech.community.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
