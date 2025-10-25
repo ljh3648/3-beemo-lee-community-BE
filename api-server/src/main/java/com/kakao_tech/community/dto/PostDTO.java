@@ -10,9 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 public class PostDTO {
     public static class Author {
-        private Integer id;
-        private String nickname;
-        private String profileUrl;
+        private Integer id; // 작성자 PK 아이디
+        private String nickname; // 작성자 닉네임
+        private String profileUrl; // 작성자 프로필 이미지 주소
     }
 
     // 게시글 리스트 가져오기
