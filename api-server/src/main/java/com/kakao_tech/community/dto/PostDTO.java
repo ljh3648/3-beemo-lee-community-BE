@@ -1,14 +1,18 @@
 package com.kakao_tech.community.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
 @AllArgsConstructor
 public class PostDTO {
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
     public static class Author {
         private Integer id; // 작성자 PK 아이디
         private String nickname; // 작성자 닉네임
@@ -16,6 +20,9 @@ public class PostDTO {
     }
 
     // 게시글 리스트 가져오기
+    @Getter
+    @Builder
+    @AllArgsConstructor
     public static class ListResponse {
         private List<SummaryResponse> posts; // 간략한 게시글 조회 응답 리스트화.
         private Long postsTotalCount; // 커뮤니티에 존재하는 총 포스트 갯수.
@@ -24,6 +31,9 @@ public class PostDTO {
     }
 
     // 간단 게시물 조회용
+    @Getter
+    @Builder
+    @AllArgsConstructor
     public static class SummaryResponse {
         private Long id; // 게시물 PK 아이디
         private Author author; // 작성자 정보, 아이디, 닉네임, 프로필 이미지 주소
@@ -36,6 +46,9 @@ public class PostDTO {
     }
 
     // 상세 게시물 조회용
+    @Getter
+    @Builder
+    @AllArgsConstructor
     public static class DetailResponse {
         private Long id; // 게시물 PK 아이디
         private Author author; // 작성자 정보, 아이디, 닉네임, 프로필 이미지 주소
