@@ -37,6 +37,9 @@ dependencies {
 
 	implementation 'org.mindrot:jbcrypt:0.4'
 
+	// 핫로드 개발 도구 추가
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
