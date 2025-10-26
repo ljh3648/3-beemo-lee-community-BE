@@ -23,6 +23,7 @@ public class PostDTO {
         private Long lastPostId; // 마지막으로 전송된 포스트 PK 아이디.
     }
 
+    // 간단 게시물 조회용
     public static class SummaryResponse {
         private Long id; // 게시물 PK 아이디
         private Author author; // 작성자 정보, 아이디, 닉네임, 프로필 이미지 주소
@@ -34,6 +35,7 @@ public class PostDTO {
         private LocalDateTime updateAt; // 게시글 마지막 수정일
     }
 
+    // 상세 게시물 조회용
     public static class DetailResponse {
         private Long id; // 게시물 PK 아이디
         private Author author; // 작성자 정보, 아이디, 닉네임, 프로필 이미지 주소
