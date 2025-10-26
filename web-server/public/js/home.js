@@ -5,7 +5,7 @@ const loading = document.getElementById('loading');
 const profileImage = document.getElementById('profileImage');
 
 // 상태
-let currentPage = 0;
+let lastPostId = null;
 let isLoading = false;
 let hasMore = true;
 
@@ -31,25 +31,17 @@ async function checkSession() {
     }
 }
 
-// 더미 데이터 생성
-function generateDummyPosts(page) {
-    const posts = [];
-    const startId = page * 10 + 1;
-
-    for (let i = 0; i < 10; i++) {
-        const id = startId + i;
-        posts.push({
-            id: id,
-            title: `제목 ${id}`,
-            author: `더미 작성자 ${id}`,
-            likes: Math.floor(Math.random() * 150000),
-            comments: Math.floor(Math.random() * 1000),
-            views: Math.floor(Math.random() * 50000),
-            createdAt: '2021-01-01 00:00:00'
-        });
-    }
-
-    return posts;
+// 날짜 포맷팅 (LocalDateTime을 "YYYY-MM-DD HH:MM:SS" 형식으로)
+function formatDate(dateTimeStr) {
+    if (!dateTimeStr) return '';
+    const date = new Date(dateTimeStr);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 // 숫자 포맷팅 (1k, 10k, 100k)
@@ -78,16 +70,16 @@ function createPostCard(post) {
     card.innerHTML = `
         <div class="post-header">
             <h3 class="post-title">${displayTitle}</h3>
-            <span class="post-date">${post.createdAt}</span>
+            <span class="post-date">${formatDate(post.createAt)}</span>
         </div>
         <div class="post-stats">
-            <span class="stat-item">좋아요 ${formatNumber(post.likes)}</span>
-            <span class="stat-item">댓글 ${formatNumber(post.comments)}</span>
-            <span class="stat-item">조회수 ${formatNumber(post.views)}</span>
+            <span class="stat-item">좋아요 ${formatNumber(post.likesCnt || 0)}</span>
+            <span class="stat-item">댓글 ${formatNumber(post.commentsCnt || 0)}</span>
+            <span class="stat-item">조회수 ${formatNumber(post.viewsCnt || 0)}</span>
         </div>
         <div class="post-footer">
             <div class="author-avatar"></div>
-            <span class="author-name">${post.author}</span>
+            <span class="author-name">${post.author.nickname}</span>
         </div>
     `;
 
@@ -101,24 +93,44 @@ async function loadPosts() {
     isLoading = true;
     loading.style.display = 'block';
 
-    // 더미 데이터 로드 (API가 없으므로)
-    setTimeout(() => {
-        const posts = generateDummyPosts(currentPage);
+    try {
+        // API 호출 - offset이 있으면 쿼리에 포함
+        const url = lastPostId
+            ? `/api/posts?limit=10&offset=${lastPostId}`
+            : '/api/posts?limit=10';
 
-        // 5페이지까지만 로드 (총 50개 게시글)
-        if (currentPage >= 4) {
-            hasMore = false;
-        }
-
-        posts.forEach(post => {
-            const card = createPostCard(post);
-            postsContainer.appendChild(card);
+        const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include'
         });
 
-        currentPage++;
+        if (!response.ok) {
+            throw new Error('게시글 로드 실패');
+        }
+
+        const data = await response.json();
+
+        // 더 이상 게시글이 없으면 hasMore를 false로 설정
+        if (data.postsGetCount === 0 || data.posts.length === 0) {
+            hasMore = false;
+        } else {
+            // 게시글 카드 생성 및 추가
+            data.posts.forEach(post => {
+                const card = createPostCard(post);
+                postsContainer.appendChild(card);
+            });
+
+            // lastPostId 업데이트
+            lastPostId = data.lastPostId;
+        }
+
+    } catch (error) {
+        console.error('게시글 로드 오류:', error);
+        hasMore = false;
+    } finally {
         isLoading = false;
         loading.style.display = 'none';
-    }, 500);
+    }
 }
 
 // 인피니티 스크롤
@@ -157,7 +169,7 @@ document.addEventListener('click', (e) => {
 // 로그아웃
 logoutButton.addEventListener('click', async () => {
     try {
-        const response = await fetch('/api/auth/sessions', {
+        await fetch('/api/auth/sessions', {
             method: 'DELETE',
             credentials: 'include'
         });

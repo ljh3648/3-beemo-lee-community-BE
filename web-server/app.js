@@ -40,6 +40,10 @@ app.get('/user/password/edit', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/html/user-password-edit.html'));
 });
 
+app.get('/posts/create', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/html/make-post.html'));
+});
+
 app.use((req, res) => {
   res.status(404).send('페이지를 찾을 수 없습니다.');
 });
