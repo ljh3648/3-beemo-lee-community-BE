@@ -60,4 +60,14 @@ public class PostDTO {
         private LocalDateTime createAt; // 게시글 작성일
         private LocalDateTime updateAt; // 게시글 마지막 수정일
     }
+
+    // 게시글 작성 요청
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class CreateRequest {
+        private String title;
+        private String body;
+        private String imageUrl;
+    }
 }

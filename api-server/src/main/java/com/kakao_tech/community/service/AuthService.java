@@ -12,8 +12,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
-
 import java.util.Random;
 
 @Service
@@ -80,5 +78,15 @@ public class AuthService {
         if (session == null) {
             throw new RestApiException(CustomErrorCode.ERROR_SIGN_IN);
         }
+    }
+
+    public User getCurrentUser(SessionDTO.RequestCookie request) {
+        Session session = sessionRepository.findBySessionKey(request.getSessionKey());
+        if (session == null) {
+            throw new RestApiException(CustomErrorCode.ERROR_SIGN_IN);
+        }
+        User result = session.getUser();
+
+        return result;
     }
 }
