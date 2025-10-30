@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RestApiException.class)
     public ResponseEntity<ErrorDTO.Response> restApiExceptionHandler(RestApiException e) {
-        CustomErrorCode errorCode = e.getCustomErrorCode();
+        AuthErrorCode errorCode = e.getAuthErrorCode();
         ErrorDTO.Response errorResponse = new ErrorDTO.Response(errorCode.getCode(), errorCode.getMessage());
         return ResponseEntity.status(errorCode.getHttpStatus()).body(errorResponse);
     }
