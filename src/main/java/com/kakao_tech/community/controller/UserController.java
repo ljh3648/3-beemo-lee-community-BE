@@ -1,6 +1,6 @@
 package com.kakao_tech.community.controller;
 
-import com.kakao_tech.community.dto.UserDTO;
+import com.kakao_tech.community.dto.user.UserDTO;
 import com.kakao_tech.community.service.UserService;
 
 import jakarta.servlet.http.HttpServletResponse;
