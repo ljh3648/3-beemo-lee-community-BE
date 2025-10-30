@@ -1,7 +1,7 @@
-package com.kakao_tech.community.dto;
+package com.kakao_tech.community.dto.user;
 
 import com.kakao_tech.community.entity.User;
-import com.kakao_tech.community.exception.CustomErrorCode;
+import com.kakao_tech.community.exception.AuthErrorCode;
 import com.kakao_tech.community.exception.RestApiException;
 import lombok.Getter;
 import lombok.Setter;
@@ -94,18 +94,18 @@ public class UserDTO {
             // 닉네임 null 또는 공백 검사
             if (nickname == null || nickname.isBlank()) {
 //                throw new IllegalArgumentException("닉네임 NULL 오류");
-                throw new RestApiException(CustomErrorCode.REQUIRED_NICKNAME);
+                throw new RestApiException(AuthErrorCode.REQUIRED_NICKNAME);
             }
 
             // 닉네임 길이 검사
             if(nickname.length() > 10) {
 //                throw new IllegalArgumentException("닉네임 글자는 최대 10글자 입니다.");
-                throw new RestApiException(CustomErrorCode.INVALID_NICKNAME);
+                throw new RestApiException(AuthErrorCode.INVALID_NICKNAME);
             }
 
             if(!Pattern.matches("[0-9a-zA-Z가-힣]*$", nickname)) {
 //                throw new IllegalArgumentException("닉네임은 숫자, 영어, 한글 입력만 가능합니다.");
-                throw new RestApiException(CustomErrorCode.INVALID_NICKNAME);
+                throw new RestApiException(AuthErrorCode.INVALID_NICKNAME);
             }
         }
 
@@ -113,18 +113,18 @@ public class UserDTO {
             // 이메일 null 또는 공백 검사
             if (email == null || email.isBlank()) {
 //                throw new IllegalArgumentException("이메일 NULL 오류");
-                throw new RestApiException(CustomErrorCode.REQUIRED_EMAIL);
+                throw new RestApiException(AuthErrorCode.REQUIRED_EMAIL);
             }
 
             // 이메일 길이 검사
             if (email.length() > 320) {
 //                throw new IllegalArgumentException("이메일은 320자를 초과할 수 없습니다.");
-                throw new RestApiException(CustomErrorCode.INVALID_EMAIL);
+                throw new RestApiException(AuthErrorCode.INVALID_EMAIL);
             }
 
             if (!Pattern.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", email)) {
 //                throw new IllegalArgumentException("이메일 양식이 올바르지 않습니다.");
-                throw new RestApiException(CustomErrorCode.INVALID_EMAIL);
+                throw new RestApiException(AuthErrorCode.INVALID_EMAIL);
             }
         }
 
@@ -132,12 +132,12 @@ public class UserDTO {
             // 비밀번호 NULL 또는 공백 검사
             if (password == null || password.isBlank()) {
 //                throw new IllegalArgumentException("패스워드 NULL 오류.");
-                throw new RestApiException(CustomErrorCode.REQUIRED_PASSWORD);
+                throw new RestApiException(AuthErrorCode.REQUIRED_PASSWORD);
             }
 
             if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$",  password)) {
 //                throw new IllegalArgumentException("비밀번호 양식이 올바르지 않습니다.");
-                throw new RestApiException(CustomErrorCode.INVALID_PASSWORD);
+                throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
             }
         }
     }
