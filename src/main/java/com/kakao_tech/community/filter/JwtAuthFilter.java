@@ -85,7 +85,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         try {
             var jws = jwtProvider.parse(token);
             Claims body = jws.getBody();
-            request.setAttribute("userId", Long.valueOf(body.getSubject()));
+            request.setAttribute("userId", Integer.valueOf(body.getSubject()));
             request.setAttribute("role", body.get("role"));
             return true;
         } catch (Exception exception) {
