@@ -70,4 +70,11 @@ public class PostDTO {
         private String body;
         private String imageUrl;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class CreateResponse {
+        private Long postId;
+    }
 }
