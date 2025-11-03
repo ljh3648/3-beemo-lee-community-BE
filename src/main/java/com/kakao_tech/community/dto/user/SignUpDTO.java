@@ -11,17 +11,19 @@ public class SignUpDTO {
     @Getter
     @AllArgsConstructor
     public static class Request {
-        @NotBlank(message = "{required.user.nickname}")
+        @NotBlank
+        @Pattern(regexp = "^[0-9a-zA-Z가-힣]{2,10}$")
         private String nickname;
 
-        @NotBlank(message = "{requir`required.user.password}")
-        @Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$", message = "{invalid.user.email}")
-        @Size(max = 320, message = "{invalid.user.email}")
+        @NotBlank
+        @Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
+        @Size(max = 320)
         private String email;
 
-        @NotBlank(message = "{required.user.password}")
-        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$", message = "{invalid.user.password}")
+        @NotBlank
+        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$")
         private String password;
+
         private String profileUrl;
 
         // TODO: 사용자 약관 동의 여부도 포함.
