@@ -1,6 +1,6 @@
 package com.kakao_tech.community.service;
 
-import com.kakao_tech.community.dto.user.UserDTO;
+import com.kakao_tech.community.dto.user.SignUpDTO;
 import com.kakao_tech.community.entity.RefreshToken;
 import com.kakao_tech.community.entity.User;
 import com.kakao_tech.community.exception.AuthErrorCode;
@@ -142,22 +142,23 @@ public class UserService {
     public record TokenResponse(String accessToken, String refreshToken) {
     }
 
-    public UserDTO.SignUpResponse createUser(UserDTO.SignUpRequest userDTO, MultipartFile profileImage) {
-        if (userRepository.existsByNickname(userDTO.getNickname())) {
+    public SignUpDTO.Response createUser(SignUpDTO.Request request, MultipartFile profileImage) {
+
+        // 닉네임 중복 검사
+        if (userRepository.existsByNickname(request.getNickname())) {
             throw new RestApiException(AuthErrorCode.DUPLICATE_NICKNAME);
         }
 
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
+        // 이메일 중복 검사
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new RestApiException(AuthErrorCode.DUPLICATE_EMAIL);
         }
 
         User user = new User(
-                userDTO.getNickname(),
-                userDTO.getEmail(),
-                BCrypt.hashpw(userDTO.getPassword(), BCrypt.gensalt()),
-                userDTO.getProfileUrl());
-
-        user = userRepository.save(user);
+                request.getNickname(),
+                request.getEmail(),
+                BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()), // 비밀번호 암호화 저장.
+                request.getProfileUrl());
 
         if (profileImage != null) {
             user.setProfileUrl(
@@ -165,9 +166,14 @@ public class UserService {
                             profileImage,
                             "users/" + user.getId() + "/profile/",
                             "profile_" + profileImage.getOriginalFilename()));
-            userRepository.save(user);
         }
 
-        return new UserDTO.SignUpResponse(user);
+        user = userRepository.save(user);
+
+        return new SignUpDTO.Response(
+                user.getId(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getProfileUrl());
     }
 }
