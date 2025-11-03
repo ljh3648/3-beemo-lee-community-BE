@@ -142,6 +142,7 @@ public class UserService {
     public record TokenResponse(String accessToken, String refreshToken) {
     }
 
+    @Transactional
     public SignUpDTO.Response createUser(SignUpDTO.Request request, MultipartFile profileImage) {
 
         // 닉네임 중복 검사
