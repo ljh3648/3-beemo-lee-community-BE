@@ -16,8 +16,8 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class PostService {
 
     @Autowired
