@@ -24,9 +24,11 @@ public enum CustomErrorCode implements ErrorCode {
     INVALID_EMAIL(BAD_REQUEST, "INVALID_EMAIL", "이메일 형식이 올바르지 않아요."),
     INVALID_EMAIL_LENGTH_OVER(BAD_REQUEST, "INVALID_EMAIL_LENGTH_OVER", "이메일은 최대 360자 이내이에요."),
     INVALID_PASSWORD(BAD_REQUEST, "INVALID_PASSWORD", "비밀번호 형식이 올바르지 않아요."),
+    INVALID_SESSIONID(BAD_REQUEST, "INVALID_SESSIONID", "로그인이 필요해요."),
     // 검증 오류
     // 틀린_패스워드_확인값
-    DIFFERENT_PASSWORD_CONFIRM(BAD_REQUEST, "DIFFERENT_PASSWORD_CONFIRM","입력된 비밀번호와 확인 비밀번호가 달라요.");
+    DIFFERENT_PASSWORD_CONFIRM(BAD_REQUEST, "DIFFERENT_PASSWORD_CONFIRM","입력된 비밀번호와 확인 비밀번호가 달라요."),
+    DIFFERENT_SIGN_INFO(BAD_REQUEST, "DIFFERENT_SIGN_INFO","입력된 정보가 올바르지 않아요.");
 
     private HttpStatus httpStatus;
     private String code;
