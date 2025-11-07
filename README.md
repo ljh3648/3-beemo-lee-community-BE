@@ -1,1 +1,1 @@
-g# kakaotech-community
+# 카카오부트캠프 커뮤니티 프로젝트
