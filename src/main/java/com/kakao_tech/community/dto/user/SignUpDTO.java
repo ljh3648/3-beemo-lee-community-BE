@@ -5,10 +5,12 @@ import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class SignUpDTO {
 
     @Getter
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class Request {
         @NotBlank
@@ -23,8 +25,6 @@ public class SignUpDTO {
         @NotBlank
         @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$")
         private String password;
-
-        private String profileUrl;
 
         // TODO: 사용자 약관 동의 여부도 포함.
     }
