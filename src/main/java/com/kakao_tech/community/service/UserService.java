@@ -160,15 +160,20 @@ public class UserService {
                 request.getEmail(),
                 BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
 
-        if (profileImage != null) {
-            user.setProfileUrl(
-                    imageService.uploadImage(
-                            profileImage,
-                            "users/" + user.getId() + "/profile/",
-                            "profile_" + profileImage.getOriginalFilename()));
-        }
-
+        // 먼저 user를 DB에 저장하여 ID를 할당받음
         user = userRepository.save(user);
+
+        if (profileImage != null) {
+            // 파일 확장자 추출
+            String originalFilename = profileImage.getOriginalFilename();
+            String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+
+            String imageUrl = imageService.uploadImage(
+                    profileImage,
+                    "users/" + user.getId() + "/profile/",
+                    "profile" + extension);
+            user.setProfileUrl(imageUrl);
+        }
 
         return new SignUpDTO.Response(
                 user.getId(),
