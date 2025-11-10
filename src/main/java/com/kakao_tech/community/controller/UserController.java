@@ -41,7 +41,7 @@ public class UserController {
             return ResponseEntity.status(401).build();
         }
 
-        return ResponseEntity.ok().body(Map.of("message", "로그인 성공"));
+        return ResponseEntity.status(201).body(Map.of("message", "로그인 성공"));
     }
 
     @PostMapping("/refresh")
@@ -82,10 +82,10 @@ public class UserController {
     // 회원가입
     @PostMapping("/users")
     public ResponseEntity<?> createUser(
-            @Valid @RequestBody SignUpDTO.Request body,
+            @Valid @RequestPart(value = "user") SignUpDTO.Request user,
             @RequestPart(value = "profileImage", required = false) MultipartFile profileImage) {
 
-        SignUpDTO.Response result = userService.createUser(body, profileImage);
+        SignUpDTO.Response result = userService.createUser(user, profileImage);
 
         return ResponseEntity.status(201).body(result);
     }
