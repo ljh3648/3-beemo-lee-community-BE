@@ -158,8 +158,7 @@ public class UserService {
         User user = new User(
                 request.getNickname(),
                 request.getEmail(),
-                BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()), // 비밀번호 암호화 저장.
-                request.getProfileUrl());
+                BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
 
         if (profileImage != null) {
             user.setProfileUrl(
