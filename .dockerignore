@@ -1,0 +1,7 @@
+.git/
+.gradle/
+.vscode/
+bin/
+deploy/
+build/
+images/

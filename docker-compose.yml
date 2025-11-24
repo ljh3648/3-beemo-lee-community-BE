@@ -1,0 +1,10 @@
+services:
+  dev-community-was:
+    build: .
+    env_file: .env
+    networks:
+      - community-network
+
+networks:
+  community-network:
+    external: true
