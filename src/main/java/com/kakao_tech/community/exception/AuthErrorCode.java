@@ -2,9 +2,12 @@ package com.kakao_tech.community.exception;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.AllArgsConstructor;
+
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-public enum CustomErrorCode implements ErrorCode {
+@AllArgsConstructor
+public enum AuthErrorCode implements ErrorCode {
     // 어떤 오류인지, 어떤 리소스인지?, 비고(선택)
     // 로그인 에러를 숨기고 싶을때 사용하는 에러
     ERROR_SIGN_IN(BAD_REQUEST, "ERROR_SIGN_IN", "이메일과 비밀번호를 확인해주세요."),
@@ -33,12 +36,6 @@ public enum CustomErrorCode implements ErrorCode {
     private HttpStatus httpStatus;
     private String code;
     private String message;
-
-    CustomErrorCode(HttpStatus httpStatus, String code, String message) {
-        this.httpStatus = httpStatus;
-        this.code = code;
-        this.message = message;
-    }
 
     public HttpStatus getHttpStatus() {
         return this.httpStatus;

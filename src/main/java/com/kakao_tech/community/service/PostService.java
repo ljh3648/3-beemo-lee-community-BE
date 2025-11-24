@@ -10,13 +10,14 @@ import com.kakao_tech.community.entity.Post;
 import com.kakao_tech.community.entity.User;
 import com.kakao_tech.community.repository.PostRepository;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class PostService {
 
     @Autowired
@@ -74,10 +75,10 @@ public class PostService {
         return response;
     }
 
-    // TODO : 사진 여러장 받을 수 있도록 수정 필요. List<String> images 뭐 이런식으로
-    public Long createPost(String title, String body, String imageUrl, User user) {
+    @Transient
+    public PostDTO.CreateResponse createPost(String title, String body, String imageUrl, User user) {
         Post post = new Post(title, body, imageUrl, user);
         post = postRepository.save(post);
-        return post.getId();
+        return new PostDTO.CreateResponse(post.getId());
     }
 }

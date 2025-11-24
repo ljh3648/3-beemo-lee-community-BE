@@ -1,8 +1,5 @@
 package com.kakao_tech.community.controller;
 
-import java.net.URI;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,22 +7,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kakao_tech.community.dto.PostDTO;
-import com.kakao_tech.community.dto.SessionDTO;
-import com.kakao_tech.community.entity.User;
 import com.kakao_tech.community.service.PostService;
+import com.kakao_tech.community.service.UserService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/posts")
+@RequiredArgsConstructor
 public class PostController {
 
-    @Autowired
     public final PostService postService;
+    public final UserService userService;
 
     @GetMapping
     // GET - '/posts?limit=10'
@@ -37,21 +34,16 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-    // @PostMapping
-    // public ResponseEntity<?> createPost(@RequestBody PostDTO.CreateRequest
-    // request,
-    // @RequestHeader(value = "Cookie", required = false) String cookie) {
-    // // 세션 인증 후, user 객체 넘기기
-    // SessionDTO.RequestCookie session = new SessionDTO.RequestCookie(cookie);
-    // User user = authService.getCurrentUser(session);
+    // 게시글 생성
+    // TODO: 사진 여러장 받고 처리할 수 있도록 추가 필요함.
+    @PostMapping
+    public ResponseEntity<PostDTO.CreateResponse> createPost(@RequestAttribute("userId") Integer userid,
+            @RequestBody PostDTO.CreateRequest request) {
 
-    // // 게시글 작성 서비스 호출
-    // Long postId = postService.createPost(request.getTitle(), request.getBody(),
-    // request.getImageUrl(), user);
+        PostDTO.CreateResponse response = postService.createPost(request.getTitle(), request.getBody(),
+                request.getImageUrl(), userService.getUser(userid));
 
-    // return ResponseEntity
-    // .created(URI.create("/api/posts/" + postId))
-    // .build();
-    // }
+        return ResponseEntity.status(201).body(response);
+    }
 
 }

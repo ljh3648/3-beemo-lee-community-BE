@@ -3,6 +3,7 @@ package com.kakao_tech.community.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -64,10 +65,18 @@ public class PostDTO {
     // 게시글 작성 요청
     @Getter
     @Builder
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateRequest {
         private String title;
         private String body;
         private String imageUrl;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class CreateResponse {
+        private Long postId;
     }
 }

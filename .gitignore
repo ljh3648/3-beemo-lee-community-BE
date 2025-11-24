@@ -5,6 +5,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+images/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -36,8 +38,13 @@ out/
 ### VS Code ###
 .vscode/
 
-
 ### Java ###
 *.jar
 
+### Mac ###
 .DS_Store
+
+
+### ENV ###
+.env*
+!.env.example

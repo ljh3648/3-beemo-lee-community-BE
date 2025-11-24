@@ -27,6 +27,8 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
 	// TODO : 5.1.0 버전 취약점 존재 추후 수정 필요.
 	implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
@@ -48,14 +50,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 clean {
 	delete file('src/main/generated')
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
 }

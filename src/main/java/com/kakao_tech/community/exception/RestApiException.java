@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class RestApiException extends RuntimeException {
 
-    final private CustomErrorCode customErrorCode;
+    final private AuthErrorCode authErrorCode;
 
-    public RestApiException(CustomErrorCode customErrorCode) {
-        this.customErrorCode = customErrorCode;
+    public RestApiException(AuthErrorCode authErrorCode) {
+        this.authErrorCode = authErrorCode;
     }
 
 }

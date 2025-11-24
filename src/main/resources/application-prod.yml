@@ -1,0 +1,5 @@
+# Production profile - overrides logging level
+logging:
+  level:
+    root: warn
+    org.hibernate.SQL: warn
